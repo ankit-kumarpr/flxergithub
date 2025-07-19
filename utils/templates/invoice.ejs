@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Flexr Membership Invoice</title>
+</head>
+<body>
+  <h1>Flexr Membership Invoice</h1>
+  <p><strong>Name:</strong> <%= user.name %></p>
+  <p><strong>Email:</strong> <%= user.email %></p>
+  <p><strong>Membership:</strong> <%= membership.type.toUpperCase() %></p>
+  <p><strong>Amount Paid:</strong> Rs. <%= membership.price %></p>
+  <p><strong>Valid Till:</strong> <%= membership.endDate.toDateString() %></p>
+  <p><strong>Invoice ID:</strong> <%= razorpay_payment_id %></p>
+  <hr>
+  <p>Thank you for joining Flexr!</p>
+</body>
+</html>
