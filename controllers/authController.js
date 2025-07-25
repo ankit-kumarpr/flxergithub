@@ -3,6 +3,8 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const sendEmail = require("../utils/sendEmail");
 const welcomeTemplate = require("../utils/templates/welcomeTemplate");
+const Membership = require("../models/membershipModel");
+
 
 const generateCustomID = (username) => {
   const random = Math.floor(100 + Math.random() * 90000);
