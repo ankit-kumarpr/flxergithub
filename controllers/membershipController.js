@@ -43,7 +43,7 @@ const buyMembership = async (req, res) => {
     } else {
       // Even if referral code already exists, still generate referralLink if not present
       if (!user.referralLink) {
-        referralLink = `${BASE_URL}/register?ref=${referralCodeForUser}`;
+        referralLink = `https://flixer-red.vercel.app/register/register?ref=${referralCodeForUser}`;
         user = await User.findByIdAndUpdate(
           userId,
           {
