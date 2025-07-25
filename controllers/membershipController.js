@@ -30,7 +30,7 @@ const buyMembership = async (req, res) => {
 
     if (!referralCodeForUser) {
       referralCodeForUser = generateReferralCode(user.name);
-      referralLink = `${BASE_URL}/register?ref=${referralCodeForUser}`;
+      referralLink = `https://flixer-red.vercel.app/register?ref=${referralCodeForUser}`;
 
       user = await User.findByIdAndUpdate(
         userId,
