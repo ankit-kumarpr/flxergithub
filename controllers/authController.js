@@ -91,21 +91,38 @@ const login = async (req, res) => {
 // Get Profile
 const getProfile = async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select("-password");
+    const userId = req.user.id;
 
-   return res.status(200).json({
-    error:false,
-    message:"Profile data",
-    user,
-     referralLink: user.referralLink,
-     });
+    // Fetch user data without password
+    const user = await User.findById(userId).select("-password");
+
+    if (!user) {
+      return res.status(404).json({
+        error: true,
+        message: "User not found",
+      });
+    }
+
+    // Fetch latest membership for the user (if any)
+    const membership = await Membership.findOne({ user: userId })
+      .sort({ startDate: -1 });
+
+    return res.status(200).json({
+      error: false,
+      message: "Profile fetched successfully",
+      user,
+      referralLink: user.referralLink,
+      membership: membership || null, // null if no membership
+    });
   } catch (err) {
-  return  res.status(500).json({ 
-    error:true,
-    message: err.message
- });
+    console.error("Get Profile Error:", err);
+    return res.status(500).json({
+      error: true,
+      message: err.message,
+    });
   }
 };
+
 
 // Update Profile
 const updateProfile = async (req, res) => {
